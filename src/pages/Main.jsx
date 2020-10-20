@@ -8,6 +8,7 @@ import edit from "../assets/ico/edit.svg";
 
 import { Header, Task, List } from "../components";
 
+import { loadUser } from "../redux/actions/user";
 import { fetchTask } from "../redux/actions/tasks";
 // const tasks = ["Купить молоко", "Купить pizza", "Купить xbox"];
 const lists = ["Поездка 2020", "dev"];
@@ -20,6 +21,7 @@ function Main() {
   const tasksIsLoaded = useSelector(({ tasks }) => tasks.isLoaded);
   
   React.useEffect(() => {
+    dispatch(loadUser());
     dispatch(fetchTask());
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 

@@ -1,16 +1,22 @@
 import React from "react";
 
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import { Main, Login } from "./pages";
+import { Main, Login, Register } from "./pages";
+import { PrivateRoute } from "./auth/PrivateRoute";
 
 function App() {
   return (
-    <div>
-      <Route path="/" component={Main} exact />
+    <Switch>
+      <PrivateRoute path="/" component={Main} exact />
       <Route path="/login" component={Login} exact />
-    </div>
+      <Route path="/register" component={Register} exact />
+    </Switch>
   );
 }
+
+/* TODO
+-login enter check
+*/
 
 export default App;

@@ -1,41 +1,34 @@
-import React from "react";
+import React from 'react'
 
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/actions/user";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../redux/actions/user";
 
 import chechIco from '../assets/ico/calendar-check.svg';
 
 const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-function Login() {
+function Register() {
   const dispatch = useDispatch();
-  const history = useHistory();
-
-  const userIsLoaded = useSelector(({ user }) => user.isLoaded);
-  const user = useSelector(({ user }) => user.user);
 
   const [mail, setMail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [password2, setPassword2] = React.useState('');
+  const [buttonClick, setButtonClick] = React.useState(false);
 
   const SignIn = () => {
-    if (regex.test(mail) && password.length > 0) {
-      dispatch(loginUser(mail, password));
+    if (regex.test(mail) && password.length > 6) {
+      dispatch(registerUser(mail, password, password2));
+      setButtonClick(true);
     }else{
       alert('Не правильный формат почты или пароля!');
     }
   }
 
-  React.useEffect(() => {
-    if (userIsLoaded && user && user.confirmed) {
-      history.push('/');
-    }
-  }, [userIsLoaded])
-
   return (
     <div className="auth-main">
-      {/* { !!localStorage.getItem("token") ? (<Redirect push to="/" />) : null } */}
+      { buttonClick ? (<Redirect push to="/login" />) : null }
       <img src={chechIco} alt="todo" />
       <div className="main__circle"></div>
       <div className="main__rectangle">
@@ -44,16 +37,19 @@ function Login() {
           <input type="text" className="auth__input" value={mail} onChange={(e) => setMail(e.target.value)} />
           <span className="auth__header">Password:</span>
           <input type="password" className="auth__input" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <span className="auth__header">Repeat Password:</span>
+          <input type="password" className="auth__input" value={password2} onChange={(e) => setPassword2(e.target.value)} />
+
           <div className="auth__buttons">
             <button className="auth__button" onClick={SignIn}>Sign In</button>
-            <a href="http://localhost:3000/register" className="auth__link">
-              no account?
+            <a href="http://localhost:3000/login" className="auth__link">
+              have an account?
             </a>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Register
