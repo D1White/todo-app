@@ -11,8 +11,7 @@ import { Header, Task, List } from "../components";
 import { loadUser } from "../redux/actions/user";
 import { fetchTask } from "../redux/actions/tasks";
 import { fetchList } from "../redux/actions/lists";
-import { updateList } from "../redux/actions/lists";
-// const tasks = ["Купить молоко", "Купить pizza", "Купить xbox"];
+import { setActiveList } from "../redux/actions/lists";
 
 function Main() {
 
@@ -21,16 +20,17 @@ function Main() {
   const tasks = useSelector(({ tasks }) => tasks.task);
   const tasksIsLoaded = useSelector(({ tasks }) => tasks.isLoaded);
   const lists = useSelector(({ lists }) => lists.list);
-
-  const [activeList, setActiveList] = React.useState(null);
-
-  const [listsState, setListsState] = React.useState([]);
+  const activeList = useSelector(({ lists }) => lists.activeList);
   
   React.useEffect(() => {
     dispatch(loadUser());
-    dispatch(fetchTask());
     dispatch(fetchList());
+    dispatch(fetchTask());
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
+
+  const listClick = () => {
+    dispatch(setActiveList(null));
+  }
 
   return (
     <div>
@@ -38,9 +38,9 @@ function Main() {
     <div className="main">
       <div className="leftBar">
         <div className="leftBar-container">
-          <div className="leftBar__todo">
+          <div className="leftBar__todo" onClick={listClick}>
             <img src={calCheckIco} alt="Todo" />
-            <h3 className="leftBar__title active">To Do</h3>
+            <h3 className={`leftBar__title ${ activeList === null ? 'active' : '' }`}>To Do</h3>
           </div>
 
           <div className="leftBar__lists">
@@ -64,11 +64,12 @@ function Main() {
 
             <ul className="custom-lists">
               {lists &&
-                lists.map((obj) => (
+                lists.map((obj, index) => (
                   <List
                     name={obj.name}
                     color={obj.color}
                     id={obj._id}
+                    listIndex={index}
                     key={obj._id}
                   />
                 ))}
@@ -84,7 +85,9 @@ function Main() {
       <div className="rigtBar">
         <div className="rightBar-container">
           <div className="rightBar__header">
-            <h2 className="rightBar__title">Поездка 2020</h2>
+            <h2 className="rightBar__title">
+              {`${activeList !== null ? lists[activeList].name : 'ToDo'}`}
+            </h2>
             <div className="rightBar__icons">
               <img src={edit} alt="edit" className="rightBar__ico" />
               <img src={trAltIco} alt="delete" className="rightBar__ico" />

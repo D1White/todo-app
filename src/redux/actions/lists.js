@@ -8,7 +8,6 @@ export const fetchList = () => (dispatch) => {
 };
 
 export const updateList = (id, name, color) => (dispatch) => {
-
   const patchBody = {
     name: name,
     color: color,
@@ -21,11 +20,14 @@ export const updateList = (id, name, color) => (dispatch) => {
   axios.patch(`http://localhost:3001/lists/${id}`, patchBody, headerConfig).then(({ data }) => {
     dispatch(fetchList());
   });
-
-  
 };
 
 export const setList = (list) => ({
   type: "SET_LIST",
   payload: list,
+});
+
+export const setActiveList = (activeList) => ({
+  type: "SET_ACTIVE_LIST",
+  payload: activeList,
 });
