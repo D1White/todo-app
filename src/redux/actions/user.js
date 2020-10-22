@@ -14,7 +14,7 @@ export const loadUser = () => (dispatch) => {
         headers: { token: localStorage.getItem("token") },
       })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         dispatch(setUser(data.data));
       });
   } else {

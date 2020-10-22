@@ -10,8 +10,9 @@ import { Header, Task, List } from "../components";
 
 import { loadUser } from "../redux/actions/user";
 import { fetchTask } from "../redux/actions/tasks";
+import { fetchList } from "../redux/actions/lists";
+import { updateList } from "../redux/actions/lists";
 // const tasks = ["Купить молоко", "Купить pizza", "Купить xbox"];
-const lists = ["Поездка 2020", "dev"];
 
 function Main() {
 
@@ -19,10 +20,16 @@ function Main() {
 
   const tasks = useSelector(({ tasks }) => tasks.task);
   const tasksIsLoaded = useSelector(({ tasks }) => tasks.isLoaded);
+  const lists = useSelector(({ lists }) => lists.list);
+
+  const [activeList, setActiveList] = React.useState(null);
+
+  const [listsState, setListsState] = React.useState([]);
   
   React.useEffect(() => {
     dispatch(loadUser());
     dispatch(fetchTask());
+    dispatch(fetchList());
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -59,9 +66,10 @@ function Main() {
               {lists &&
                 lists.map((obj) => (
                   <List
-                    name={obj}
-                    color={"green"}
-                    key={`${obj}_${obj.index}`}
+                    name={obj.name}
+                    color={obj.color}
+                    id={obj._id}
+                    key={obj._id}
                   />
                 ))}
             </ul>

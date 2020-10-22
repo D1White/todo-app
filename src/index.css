@@ -201,12 +201,17 @@ header {
   margin-right: 12px;
 }
 
+.custom-list__circle.red {
+  background-color: #e74c3c;
+}
 .custom-list__circle.green {
   background-color: #27AE60;
 }
-
+.custom-list__circle.yellow {
+  background-color: #f1c40f;
+}
 .custom-list__circle.orange {
-  background-color: #F2994A;
+  background-color: #e67e22;
 }
 
 
