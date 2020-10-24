@@ -130,6 +130,7 @@ function Main() {
                 <Task
                   name={obj.task}
                   id={obj._id}
+                  done={obj.done}
                   listId={activeListID}
                   index={index}
                   key={`${index}_${obj._id}`}

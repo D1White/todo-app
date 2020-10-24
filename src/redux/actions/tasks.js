@@ -52,6 +52,22 @@ export const deleteTask = (taskId, listId) => (dispatch) => {
   });
 };
 
+export const doTask = (taskId, listId, taskName, done) => (dispatch) => {
+
+  const patchBody = {
+    task: taskName,
+    done: done,
+  };
+
+  const headerConfig = {
+    headers: { token: localStorage.getItem("token") }
+  }
+
+  axios.patch(`http://localhost:3001/tasks/${taskId}`, patchBody, headerConfig).then(({ data }) => {
+    dispatch(loadList(listId));
+  });
+};
+
 
 export const setTasks = (task) => ({
   type: "SET_TASK",

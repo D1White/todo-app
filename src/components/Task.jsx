@@ -1,23 +1,26 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { deleteTask } from "../redux/actions/tasks";
+import { deleteTask, doTask } from "../redux/actions/tasks";
 
 import trash_alt from "../assets/ico/trash-alt.svg";
 
-const Task = React.memo(function Task({ name, index, id, listId }) {
+const Task = React.memo(function Task({ name, index, id, listId, done }) {
   const dispatch = useDispatch();
 
-  const [active, setActive] = React.useState(false);
+  const [active, setActive] = React.useState(done);
 
   const checkboxClick = () => {
+    dispatch(doTask(id, listId, name, !active));
     setActive(!active);
   };
 
   const delTask = () => {
     dispatch(deleteTask(id, listId));
   };
+
+
 
   return (
     <li className="rightBar__task">
@@ -26,7 +29,8 @@ const Task = React.memo(function Task({ name, index, id, listId }) {
         name="task"
         /*id={`todo_${index}`}*/
         className="task__checkbox"
-        onClick={checkboxClick}
+        checked={active}
+        onChange={checkboxClick}
       />
       <label htmlFor={`todo_${index}`} className={`task__text ${active ? "done" : ""}`}>
         {name}
