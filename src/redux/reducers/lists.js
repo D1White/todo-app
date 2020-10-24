@@ -1,6 +1,7 @@
 const initialState = {
   list: [],
   activeList: null,
+  activeListID: '',
 };
 
 const lists = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const lists = (state = initialState, action) => {
       return {
         ...state,
         activeList: action.payload,
+      };
+    case "SET_ACTIVE_LIST_ID":
+      return {
+        ...state,
+        activeListID: action.payload,
       };
     default:
       return state;

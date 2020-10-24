@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateList } from "../redux/actions/lists";
-import { setActiveList } from "../redux/actions/lists";
+import { isActiveList } from "../redux/actions/lists";
 
 const colorArr = ["red", "orange", "green", "yellow"];
 
@@ -20,7 +20,7 @@ function List({ name, color, id, listIndex }) {
   };
 
   const listClick = () => {
-    dispatch(setActiveList(listIndex));
+    dispatch(isActiveList(listIndex, id));
   }
 
   return (

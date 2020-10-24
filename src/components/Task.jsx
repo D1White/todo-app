@@ -1,12 +1,22 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+
+import { deleteTask } from "../redux/actions/tasks";
+
 import trash_alt from "../assets/ico/trash-alt.svg";
 
-function Task({ name, index }) {
+const Task = React.memo(function Task({ name, index, id, listId }) {
+  const dispatch = useDispatch();
+
   const [active, setActive] = React.useState(false);
 
   const checkboxClick = () => {
     setActive(!active);
+  };
+
+  const delTask = () => {
+    dispatch(deleteTask(id, listId));
   };
 
   return (
@@ -21,9 +31,9 @@ function Task({ name, index }) {
       <label htmlFor={`todo_${index}`} className={`task__text ${active ? "done" : ""}`}>
         {name}
       </label>
-      <img src={trash_alt} alt="delete" className="task__del" />
+      <img src={trash_alt} alt="delete" className="task__del" onClick={delTask} />
     </li>
   );
-}
+});
 
 export default Task;

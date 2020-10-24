@@ -575,3 +575,47 @@ input {
   letter-spacing: 0.07em;
   padding-top: 15px;
 }
+
+
+.injectTask {
+  margin-top: 10px;
+}
+
+.newList_input {
+  width: 100%;
+  max-width: 300px;
+  height: 25px;
+  background-color: #FAFAFA;
+
+  border: none;
+  border-bottom: 2px solid #DC4C3F;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #000;
+}
+
+.newList_input:focus {
+  outline: none;
+}
+
+.newTask__input:focus {
+  outline: none;
+}
+
+.newTask__input {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+
+  border: none;
+  border-bottom: 2px solid #DC4C3F;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #000;
+}
+
+.newTask__input:focus {
+  outline: none;
+}

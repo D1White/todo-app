@@ -31,7 +31,7 @@ function Login() {
     if (userIsLoaded && user && user.confirmed) {
       history.push('/');
     }
-  }, [userIsLoaded])
+  }, [userIsLoaded])// eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="auth-main">
