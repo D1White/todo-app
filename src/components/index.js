@@ -3,3 +3,4 @@ export {default as Task} from './Task';
 export {default as List} from './List';
 export {default as NewListInput} from './NewListInput';
 export {default as NewTaskInput} from './NewTaskInput';
+export {default as ListTitle} from './ListTitle';

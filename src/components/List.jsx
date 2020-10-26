@@ -7,7 +7,7 @@ import { isActiveList } from "../redux/actions/lists";
 
 const colorArr = ["red", "orange", "green", "yellow"];
 
-const List = React.memo(function List({ name, color, id, listIndex }) {
+function List({ name, color, id, listIndex }) {
 
   const dispatch = useDispatch();
 
@@ -57,6 +57,6 @@ const List = React.memo(function List({ name, color, id, listIndex }) {
       </div>
     </li>
   );
-});
+}
 
 export default List;

@@ -3,13 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 import userIco from "../assets/ico/user.svg";
-import trAltIco from "../assets/ico/trash-alt_lite.svg";
-import edit from "../assets/ico/edit.svg";
 
-import { Header, Task, List, NewListInput, NewTaskInput } from "../components";
+import { Header, Task, List, NewListInput, NewTaskInput, ListTitle } from "../components";
 
 import { loadUser } from "../redux/actions/user";
-import { fetchList, deleteList } from "../redux/actions/lists";
+import { fetchList } from "../redux/actions/lists";
 
 function Main() {
 
@@ -35,15 +33,10 @@ function Main() {
 
   const createNewList = () => {
     setDisplayListInput(true);
-    // dispatch(createList());
   }
 
   const hideListInput = () => {
     setDisplayListInput(false);
-  }
-
-  const deleteActiveList = () => {
-    dispatch(deleteList(activeListID));
   }
 
   const createNewTask = () => {
@@ -105,15 +98,11 @@ function Main() {
       <div className="rigtBar">
         <div className="rightBar-container">
         { activeList !== null && (
-          <div className="rightBar__header">
-            <h2 className="rightBar__title">
-              {`${activeList !== null ? lists[activeList].name : 'Chose list'}`}
-            </h2>
-            <div className="rightBar__icons">
-              <img src={edit} alt="edit" className="rightBar__ico" />
-              <img src={trAltIco} alt="delete" className="rightBar__ico" onClick={deleteActiveList} />
-            </div>
-          </div> 
+          <ListTitle
+            lists={lists}
+            activeList={activeList}
+            activeListID={activeListID}
+          />
         )}    
           <ul className="rightBar__tasks">
             {tasksIsLoaded &&

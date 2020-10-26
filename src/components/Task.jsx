@@ -9,6 +9,8 @@ import trash_alt from "../assets/ico/trash-alt.svg";
 const Task = React.memo(function Task({ name, index, id, listId, done }) {
   const dispatch = useDispatch();
 
+  const taskRef = React.useRef();
+
   const [active, setActive] = React.useState(done);
 
   const checkboxClick = () => {
@@ -20,7 +22,36 @@ const Task = React.memo(function Task({ name, index, id, listId, done }) {
     dispatch(deleteTask(id, listId));
   };
 
+  const updateTask = (newTask) => {
+    dispatch(doTask(id, listId, newTask, active));
+  };
 
+  const handleOutsideClick = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(taskRef.current)) {
+      console.log("click");
+      // console.log(taskRef.current.innerText);
+      updateTask(taskRef.current.innerText);
+      document.body.removeEventListener("click", handleOutsideClick);
+    }
+  };
+
+  const addListener = () => {
+    document.body.addEventListener("click", handleOutsideClick);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      console.log("Enter");
+      updateTask(taskRef.current.innerText);
+      document.body.removeEventListener("click", handleOutsideClick);
+      event.preventDefault();
+    }
+  };
+
+  const disablePast = (event) => {
+    event.preventDefault();
+  }
 
   return (
     <li className="rightBar__task">
@@ -32,10 +63,24 @@ const Task = React.memo(function Task({ name, index, id, listId, done }) {
         checked={active}
         onChange={checkboxClick}
       />
-      <label htmlFor={`todo_${index}`} className={`task__text ${active ? "done" : ""}`}>
+      <label
+        htmlFor={`todo_${index}`}
+        className={`task__text ${active ? "done" : ""}`}
+        ref={taskRef}
+        contentEditable="true"
+        onClick={addListener}
+        onKeyDown={handleKeyDown}
+        onPaste={disablePast}
+        suppressContentEditableWarning={true}
+      >
         {name}
       </label>
-      <img src={trash_alt} alt="delete" className="task__del" onClick={delTask} />
+      <img
+        src={trash_alt}
+        alt="delete"
+        className="task__del"
+        onClick={delTask}
+      />
     </li>
   );
 });
