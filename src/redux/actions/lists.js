@@ -3,7 +3,7 @@ import axios from "axios";
 import { setTasks } from "../actions/tasks";
 
 export const fetchList = () => (dispatch) => {
-  axios.get("http://localhost:3001/lists", { headers: { token: localStorage.getItem("token") } }).then(({ data }) => {
+  axios.get("https://todo-backend-server.herokuapp.com/lists", { headers: { token: localStorage.getItem("token") } }).then(({ data }) => {
     // console.log(data.data);
     dispatch(setList(data.data));
   });
@@ -19,7 +19,7 @@ export const updateList = (id, name, color) => (dispatch) => {
     headers: { token: localStorage.getItem("token") }
   }
 
-  axios.patch(`http://localhost:3001/lists/${id}`, patchBody, headerConfig).then(({ data }) => {
+  axios.patch(`https://todo-backend-server.herokuapp.com/lists/${id}`, patchBody, headerConfig).then(({ data }) => {
     dispatch(fetchList());
   });
 };
@@ -34,7 +34,7 @@ export const createList = (listName) => (dispatch) => {
     headers: { token: localStorage.getItem("token") }
   }
 
-  axios.post(`http://localhost:3001/lists`, postBody, headerConfig).then(({ data }) => {
+  axios.post(`https://todo-backend-server.herokuapp.com/lists`, postBody, headerConfig).then(({ data }) => {
     dispatch(fetchList());
   });
 };
@@ -45,7 +45,7 @@ export const deleteList = (listId) => (dispatch) => {
     headers: { token: localStorage.getItem("token") }
   }
 
-  axios.delete(`http://localhost:3001/lists/${listId}`, headerConfig).then(() => {
+  axios.delete(`https://todo-backend-server.herokuapp.com/lists/${listId}`, headerConfig).then(() => {
     dispatch(fetchList());
     dispatch(isActiveList(null, ''));
   });
@@ -57,7 +57,7 @@ export const isActiveList = (activeList, listId) => (dispatch) => {
   dispatch(setActiveListID(listId));
   dispatch(setActiveList(activeList));
   if (listId) {
-    axios.get(`http://localhost:3001/lists/${listId}`).then(({ data }) => {
+    axios.get(`https://todo-backend-server.herokuapp.com/lists/${listId}`).then(({ data }) => {
       dispatch(setTasks(data.data));
     });
   }

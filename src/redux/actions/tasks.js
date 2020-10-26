@@ -8,14 +8,14 @@ export const setLoadedTasks = (payload) => ({
 export const fetchTask = () => (dispatch) => {
   dispatch(setLoadedTasks(false));
 
-  axios.get("http://localhost:3001/tasks").then(({ data }) => {
+  axios.get("https://todo-backend-server.herokuapp.com/tasks").then(({ data }) => {
     // console.log(data.data);
     dispatch(setTasks(data.data));
   });
 };
 
 export const loadList = (listId) => (dispatch) => {
-  axios.get(`http://localhost:3001/lists/${listId}`).then(({ data }) => {
+  axios.get(`https://todo-backend-server.herokuapp.com/lists/${listId}`).then(({ data }) => {
     dispatch(setTasks(data.data));
   });
 };
@@ -32,7 +32,7 @@ export const createTask = (taskName, listId) => (dispatch) => {
       headers: { token: localStorage.getItem("token") }
     }
   
-    axios.post(`http://localhost:3001/tasks`, postBody, headerConfig).then(({ data }) => {
+    axios.post(`https://todo-backend-server.herokuapp.com/tasks`, postBody, headerConfig).then(({ data }) => {
       dispatch(loadList(listId));
     });
   }else{
@@ -47,7 +47,7 @@ export const deleteTask = (taskId, listId) => (dispatch) => {
     headers: { token: localStorage.getItem("token") }
   }
 
-  axios.delete(`http://localhost:3001/tasks/${taskId}`, headerConfig).then(({ data }) => {
+  axios.delete(`https://todo-backend-server.herokuapp.com/tasks/${taskId}`, headerConfig).then(({ data }) => {
     dispatch(loadList(listId));
   });
 };
@@ -63,7 +63,7 @@ export const doTask = (taskId, listId, taskName, done) => (dispatch) => {
     headers: { token: localStorage.getItem("token") }
   }
 
-  axios.patch(`http://localhost:3001/tasks/${taskId}`, patchBody, headerConfig).then(({ data }) => {
+  axios.patch(`https://todo-backend-server.herokuapp.com/tasks/${taskId}`, patchBody, headerConfig).then(({ data }) => {
     dispatch(loadList(listId));
   });
 };

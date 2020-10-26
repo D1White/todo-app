@@ -10,7 +10,7 @@ export const loadUser = () => (dispatch) => {
   
   if (localStorage.getItem("token")) {
     axios
-      .get("http://localhost:3001/users/me", {
+      .get("https://todo-backend-server.herokuapp.com/users/me", {
         headers: { token: localStorage.getItem("token") },
       })
       .then(({ data }) => {
@@ -30,7 +30,7 @@ export const loginUser = (mail, password) => (dispatch) => {
     password: password,
   };
 
-  axios.post("http://localhost:3001/auth/login", postBody).then(({ data }) => {
+  axios.post("https://todo-backend-server.herokuapp.com/auth/login", postBody).then(({ data }) => {
     if (data.data.confirmed) {
       localStorage.setItem("token", data.data.token);
       // dispatch(setUser(data.data));
@@ -50,7 +50,7 @@ export const registerUser = (mail, password, password2) => (dispatch) => {
   };
 
   axios
-    .post("http://localhost:3001/auth/register", postBody)
+    .post("https://todo-backend-server.herokuapp.com/auth/register", postBody)
     .then(({ data }) => {
       console.log(data);
     });
