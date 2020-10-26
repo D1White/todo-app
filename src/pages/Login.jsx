@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/actions/user";
@@ -52,9 +52,11 @@ function Login() {
           <input type="password" className="auth__input" value={password} onChange={(e) => setPassword(e.target.value)} />
           <div className="auth__buttons">
             <button className="auth__button" onClick={SignIn}>Sign In</button>
-            <a href="http://localhost:3000/register" className="auth__link">
-              no account?
-            </a>
+            <Link to="/register">
+              <span className="auth__link">
+                no account?
+              </span>
+            </Link>
           </div>
         </div>
       </div>

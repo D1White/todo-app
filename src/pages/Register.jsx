@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { registerUser } from "../redux/actions/user";
@@ -42,9 +42,11 @@ function Register() {
 
           <div className="auth__buttons">
             <button className="auth__button" onClick={SignIn}>Sign In</button>
-            <a href="http://localhost:3000/login" className="auth__link">
-              have an account?
-            </a>
+            <Link to="/login">
+              <span className="auth__link">
+                have an account?
+              </span>
+            </Link>
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ function List({ name, color, id, listIndex }) {
   const percentageCalc = (listId) => {
     let complatedTasks = 0;
     if (listId) {
-      axios.get(`http://localhost:3001/lists/${listId}`).then(({ data }) => {
+      axios.get(`https://todo-backend-server.herokuapp.com/lists/${listId}`).then(({ data }) => {
         data.data.forEach(e => {
           if (e.done) {
             complatedTasks++
