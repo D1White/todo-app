@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 
 import { logoutUser } from "../redux/actions/user";
 
-function Header() {
+const Header = React.memo(function Header() {
   const dispatch = useDispatch();
   const date = new Date();
   const dateArr = date.toString().split(" ").slice(1, 4);
@@ -34,6 +34,6 @@ function Header() {
       </div>
     </header>
   );
-}
+});
 
 export default Header;

@@ -6,6 +6,8 @@ import { createTask } from "../redux/actions/tasks";
 function NewTaskInput({ hideTaskInput }) {
   const dispatch = useDispatch();
 
+  const taskInputRef = React.useRef();
+
   const { activeListID } = useSelector(({ lists }) => lists);
 
   const [newTaskName, setNewTaskName] = React.useState('');
@@ -17,8 +19,19 @@ function NewTaskInput({ hideTaskInput }) {
     }
   }
 
+  const handleOutsideClick = (event) => { 
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(taskInputRef.current)) {
+      hideTaskInput();
+    }
+  }
+
+  React.useEffect(() => {
+    document.body.addEventListener("click", handleOutsideClick);
+  })
+
   return (
-    <div className="injectTask">
+    <div className="injectTask" ref={taskInputRef} >
       <input type="text" className="newTask__input" onKeyDown={handleKeyDown} value={newTaskName} onChange={(e) => setNewTaskName(e.target.value)} />
     </div>
   );

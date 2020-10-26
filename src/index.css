@@ -232,10 +232,16 @@ header {
 }
 
 .custom-list__success {
-  font-size: 16px;
-  font-weight: 400;
   opacity: 70%;
   margin-left: 8px;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+.custom-list__success-text {
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .button-block {

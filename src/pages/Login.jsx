@@ -28,8 +28,14 @@ function Login() {
   }
 
   React.useEffect(() => {
-    if (userIsLoaded && user && user.confirmed) {
-      history.push('/');
+    if (userIsLoaded && user) {
+
+      if (user.confirmed) {
+        history.push('/');  
+      }else {
+        alert('Подтвердите почту!')
+      }
+
     }
   }, [userIsLoaded])// eslint-disable-line react-hooks/exhaustive-deps
 

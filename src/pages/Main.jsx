@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux";
 
-import calCheckIco from "../assets/ico/calendar-check.svg";
+
 import userIco from "../assets/ico/user.svg";
 import trAltIco from "../assets/ico/trash-alt_lite.svg";
 import edit from "../assets/ico/edit.svg";
@@ -9,7 +9,7 @@ import edit from "../assets/ico/edit.svg";
 import { Header, Task, List, NewListInput, NewTaskInput } from "../components";
 
 import { loadUser } from "../redux/actions/user";
-import { fetchList, isActiveList, deleteList } from "../redux/actions/lists";
+import { fetchList, deleteList } from "../redux/actions/lists";
 
 function Main() {
 
@@ -28,10 +28,6 @@ function Main() {
     dispatch(loadUser());
     dispatch(fetchList());
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
-
-  const listClick = () => {
-    dispatch(isActiveList(null));
-  }
 
   const minimizeLists = () => {
     setMinimize(!minimize);
@@ -64,11 +60,6 @@ function Main() {
     <div className="main">
       <div className="leftBar">
         <div className="leftBar-container">
-          {/* <div className="leftBar__todo" onClick={listClick}>
-            <img src={calCheckIco} alt="Todo" />
-            <h3 className={`leftBar__title ${ activeList === null ? 'active' : '' }`}>To Do</h3>
-          </div> */}
-
           <div className="leftBar__lists">
             <div className="lists__header" onClick={minimizeLists}>
               <img src={userIco} alt="Lists" />
