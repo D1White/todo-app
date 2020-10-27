@@ -42,6 +42,7 @@ function Register() {
   const SignIn = () => {
     if (RegisterValidation()) {
         dispatch(registerUser(mail, password, password2));
+        alert('На почту отправлено письмо с подтверждением 📨');
         setButtonClick(true);
     }
   }

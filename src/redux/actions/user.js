@@ -33,10 +33,9 @@ export const loginUser = (mail, password) => (dispatch) => {
   axios.post("https://todo-backend-server.herokuapp.com/auth/login", postBody).then(({ data }) => {
     if (data.data.confirmed) {
       localStorage.setItem("token", data.data.token);
-      // dispatch(setUser(data.data));
       dispatch(loadUser());
     }else{
-      alert('Подтвердите почту');
+      alert('⚠ Подтвердите почту!');
     }
    
   });
