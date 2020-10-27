@@ -550,7 +550,7 @@ input {
   justify-content: center;
   flex-direction: column;
 
-  padding-top: 45px;
+  padding-top: 25px;
 }
 
 .auth__button {
@@ -624,4 +624,18 @@ input {
 
 .newTask__input:focus {
   outline: none;
+}
+
+.auth-warning {
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-warning__text {
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+  color: red;
 }

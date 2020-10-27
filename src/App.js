@@ -16,7 +16,11 @@ function App() {
 }
 
 /* TODO
++click listener problem
++auth warnings
 -login enter check
+-icons
+-animations
 */
 
 export default App;

@@ -19,7 +19,7 @@ function NewTaskInput({ hideTaskInput }) {
     }
   }
 
-  const handleOutsideClick = (event) => { 
+  const handleTaskIOutsideClick = (event) => { 
     const path = event.path || (event.composedPath && event.composedPath());
     if (!path.includes(taskInputRef.current)) {
       hideTaskInput();
@@ -27,7 +27,11 @@ function NewTaskInput({ hideTaskInput }) {
   }
 
   React.useEffect(() => {
-    document.body.addEventListener("click", handleOutsideClick);
+    document.body.addEventListener("click", handleTaskIOutsideClick);
+
+    return () => {
+      document.body.removeEventListener("click", handleTaskIOutsideClick);
+    }
   })
 
   return (

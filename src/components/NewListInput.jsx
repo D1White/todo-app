@@ -17,7 +17,7 @@ function NewListInput({ hideListInput }) {
     }
   }
 
-  const handleOutsideClick = (event) => { 
+  const handleListIOutsideClick = (event) => { 
     const path = event.path || (event.composedPath && event.composedPath());
     if (!path.includes(inputRef.current)) {
       hideListInput();
@@ -25,7 +25,11 @@ function NewListInput({ hideListInput }) {
   }
 
   React.useEffect(() => {
-    document.body.addEventListener("click", handleOutsideClick);
+    document.body.addEventListener("click", handleListIOutsideClick);
+
+    return () => {
+      document.body.removeEventListener("click", handleListIOutsideClick);
+    }
   })
 
   return (

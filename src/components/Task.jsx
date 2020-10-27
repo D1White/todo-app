@@ -26,25 +26,24 @@ const Task = React.memo(function Task({ name, index, id, listId, done }) {
     dispatch(doTask(id, listId, newTask, active));
   };
 
-  const handleOutsideClick = (event) => {
+  const handleTaskOutsideClick = (event) => {
     const path = event.path || (event.composedPath && event.composedPath());
     if (!path.includes(taskRef.current)) {
       console.log("click");
-      // console.log(taskRef.current.innerText);
       updateTask(taskRef.current.innerText);
-      document.body.removeEventListener("click", handleOutsideClick);
+      document.body.removeEventListener("click", handleTaskOutsideClick);
     }
   };
 
   const addListener = () => {
-    document.body.addEventListener("click", handleOutsideClick);
+    document.body.addEventListener("click", handleTaskOutsideClick);
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       console.log("Enter");
       updateTask(taskRef.current.innerText);
-      document.body.removeEventListener("click", handleOutsideClick);
+      document.body.removeEventListener("click", handleTaskOutsideClick);
       event.preventDefault();
     }
   };

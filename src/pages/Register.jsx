@@ -16,13 +16,33 @@ function Register() {
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
   const [buttonClick, setButtonClick] = React.useState(false);
+  const [authWarning, setAuthWarning] = React.useState('');
+
+  const RegisterValidation = () => {
+    if (!regex.test(mail)) {
+      setAuthWarning('🛑 Не правильный формат почты!');
+      return false;
+    }
+    if (mail.length < 10) {
+      setAuthWarning('🛑 Почта должна содержать не менее 10 символов!');
+      return false;
+    }
+    if (password.length < 6) {
+      setAuthWarning('🛑 Пароль должен содержать не менее 6 символов!');
+      return false;
+    }
+    if (password !== password2) {
+      setAuthWarning('🛑 Пароли не совпадают!');
+      return false;
+    }
+    setAuthWarning('');
+    return true;
+  }
 
   const SignIn = () => {
-    if (regex.test(mail) && password.length > 6) {
-      dispatch(registerUser(mail, password, password2));
-      setButtonClick(true);
-    }else{
-      alert('Не правильный формат почты или пароля!');
+    if (RegisterValidation()) {
+        dispatch(registerUser(mail, password, password2));
+        setButtonClick(true);
     }
   }
 
@@ -39,6 +59,12 @@ function Register() {
           <input type="password" className="auth__input" value={password} onChange={(e) => setPassword(e.target.value)} />
           <span className="auth__header">Repeat Password:</span>
           <input type="password" className="auth__input" value={password2} onChange={(e) => setPassword2(e.target.value)} />
+
+          { authWarning && (
+            <div className="auth-warning">
+              <span className="auth-warning__text">{authWarning}</span>
+            </div>
+          )}
 
           <div className="auth__buttons">
             <button className="auth__button" onClick={SignIn}>Sign In</button>

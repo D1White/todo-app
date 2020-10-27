@@ -22,24 +22,24 @@ const ListTitle = React.memo(function ListTitle({
     dispatch(updateList(activeListID, newListName, lists[activeList].color));
   };
 
-  const handleOutsideClick = (event) => {
+  const handleListTitleOutsideClick = (event) => {
     const path = event.path || (event.composedPath && event.composedPath());
     if (!path.includes(listRef.current)) {
       console.log("click");
       updateListName(listRef.current.innerText);
-      document.body.removeEventListener("click", handleOutsideClick);
+      document.body.removeEventListener("click", handleListTitleOutsideClick);
     }
   };
 
   const addListener = () => {
-    document.body.addEventListener("click", handleOutsideClick);
+    document.body.addEventListener("click", handleListTitleOutsideClick);
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       console.log("Enter");
       updateListName(listRef.current.innerText);
-      document.body.removeEventListener("click", handleOutsideClick);
+      document.body.removeEventListener("click", handleListTitleOutsideClick);
       event.preventDefault();
     }
   };

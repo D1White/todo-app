@@ -18,12 +18,24 @@ function Login() {
 
   const [mail, setMail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [authWarning, setAuthWarning] = React.useState('');
+
+  const LoginValidation = () => {
+    if (!regex.test(mail)) {
+      setAuthWarning('🛑 Не правильный формат почты!');
+      return false;
+    }
+    if (mail.length < 1) {
+      setAuthWarning('🛑 Введите пароль!');
+      return false;
+    }
+    setAuthWarning('');
+    return true;
+  }
 
   const SignIn = () => {
-    if (regex.test(mail) && password.length > 0) {
+    if (LoginValidation()) {
       dispatch(loginUser(mail, password));
-    }else{
-      alert('Не правильный формат почты или пароля!');
     }
   }
 
@@ -33,7 +45,7 @@ function Login() {
       if (user.confirmed) {
         history.push('/');  
       }else {
-        alert('Подтвердите почту!')
+        setAuthWarning('⚠ Подтвердите почту!');
       }
 
     }
@@ -50,6 +62,13 @@ function Login() {
           <input type="text" className="auth__input" value={mail} onChange={(e) => setMail(e.target.value)} />
           <span className="auth__header">Password:</span>
           <input type="password" className="auth__input" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+          { authWarning && (
+            <div className="auth-warning">
+              <span className="auth-warning__text">{authWarning}</span>
+            </div>
+          )}
+
           <div className="auth__buttons">
             <button className="auth__button" onClick={SignIn}>Sign In</button>
             <Link to="/register">
