@@ -48,6 +48,7 @@ export const deleteList = (listId) => (dispatch) => {
   axios.delete(`https://todo-backend-server.herokuapp.com/lists/${listId}`, headerConfig).then(() => {
     dispatch(fetchList());
     dispatch(isActiveList(null, ''));
+    dispatch(setTasks([]));
   });
 };
 

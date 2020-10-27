@@ -232,7 +232,6 @@ header {
 }
 
 .custom-list__success {
-  opacity: 70%;
   margin-left: 8px;
 
   display: flex;
