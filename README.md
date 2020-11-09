@@ -1,5 +1,4 @@
 # ToDo ✅
-Create and save anime lists with a simple app
 
 
 ## Demo
