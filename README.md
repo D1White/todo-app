@@ -43,7 +43,7 @@ Create and save anime lists with a simple app
 
 
 ### Thanks:
-The application was developed in conjunction with [Nikita Chernega](https://github.com/Nikitachr). You can see its implementation at Angular -> [url](https://github.com/Nikitachr/todo).
+The application was developed in conjunction with [Nikita Chernega](https://github.com/Nikitachr).
 
 ---
 
