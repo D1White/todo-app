@@ -41,8 +41,6 @@
 <br />
 
 
-### Thanks:
-The application was developed in conjunction with [Nikita Chernega](https://github.com/Nikitachr).
 
 ---
 
